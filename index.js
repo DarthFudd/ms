@@ -7,7 +7,22 @@ var m = s * 60;
 var h = m * 60;
 var d = h * 24;
 var w = d * 7;
-var y = d * 365.25;
+
+var y = d * 365.24219; // Tropical year. Sidereal year is 365.2421897
+// The tropical year was estimated to be 365.24219 ephemeris days on
+// 2000-01-01. Equivalently: 365 ephemeris days, 5 hours, 48 minutes,
+// and 45.19 seconds. An ephemeris day is 86,400 SI seconds. Sources:
+//     - https://en.wikipedia.org/wiki/Tropical_year
+//     - Simon et al., 1994, Astron. Astrophys., 282, 663.
+//     - http://hpiers.obspm.fr/eop-pc/models/constants.html
+//     - https://en.wikipedia.org/wiki/Sidereal_year
+// Note that the length of the tropical year changes over time. Details
+// depend on many factors, including orbital dynamics and even large
+// earthquakes, but for at least the last few hundred years it has
+// slowed by about 5 ms per year. This utility uses the 2000-01-01
+// measurement only because that estimate had numerous references.
+// Users who want to get the exact number of milliseconds for a given
+// year should calculate it themselves instead of using this utility.
 
 /**
  * Parse or format the given `val`.
